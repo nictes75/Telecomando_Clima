@@ -1,0 +1,709 @@
+# CLIMATIZZATORE MODELLO FRANCESCO CALAMITA MODIFICATO DA NICOLA TESTA
+# https://github.com/Home-Assistant-Pro-Team/Climate
+
+  - type: custom:button-card
+    variables:
+      climate: climate.codice_1322
+    triggers_update: all
+    styles:
+      card:
+        - background-color: rgba(0,0,0,0.0)
+        - border-width: 0px
+        - height: 700px
+        - width: 400px
+        - padding: 0px
+        - border-radius: 0px
+        - margin-left: 25%
+      custom_fields:
+        image:
+          - position: absolute
+          - left: 30px
+          - top: 1px
+        plus:
+          - position: absolute
+          - left: 264px
+          - top: 505px
+        less:
+          - position: absolute
+          - left: 60px
+          - top: 505px
+        power:
+          - position: absolute
+          - left: 163px
+          - top: 498px
+        dry:
+          - position: absolute
+          - left: 163px
+          - top: 610px
+        fan_speed:
+          - position: absolute
+          - left: 239px
+          - top: 424px
+        fan:
+          - position: absolute
+          - left: 85px
+          - top: 424px  
+        heat:
+          - position: absolute
+          - left: 80px
+          - top: 585px
+        cool:
+          - position: absolute
+          - left: 235px
+          - top: 585px
+        display:
+          - position: absolute
+          - left: 94px
+          - top: 104px
+        name_climate:
+          - position: absolute
+          - left: '95px'
+          - top: 35px
+    custom_fields:
+
+      dry:
+        card:
+          type: custom:button-card
+          icon: mdi:water-percent
+          styles:
+            card:
+              - height: 50px
+              - width: 80px
+              - background-color: rgba(0,0,0,0.0
+              - border-width: 0px
+              - border-radius: 0px
+            icon:
+              - width: 50%
+              - color: >
+                  [[[
+                    if (states['climate.codice_1322'].state === 'dry') { 
+                      return 'orange';
+                    }else{
+                      return 'rgba(120, 120, 120, 1)';
+                    }  
+                  ]]]    
+          tap_action:
+            action: call-service
+            service: climate.set_hvac_mode
+            service_data:
+              entity_id: '[[[ return variables.climate ]]]'
+              hvac_mode: dry
+
+
+
+      heat:
+        card:
+          type: custom:button-card
+          icon: mdi:fire
+          styles:
+            card:
+              - height: 50px
+              - width: 80px
+              - background-color: rgba(0,0,0,0.0
+              - border-width: 0px
+              - border-radius: 0px
+            icon:
+              - width: 40%
+              - color: >
+                  [[[
+                    if (states['climate.codice_1322'].state === 'heat') { 
+                      return 'red';
+                    }else{
+                      return 'rgba(120, 120, 120, 1)';
+                    }  
+                  ]]]  
+          tap_action:
+            action: call-service
+            service: climate.set_hvac_mode
+            service_data:
+              entity_id: '[[[ return variables.climate ]]]'
+              hvac_mode: heat
+
+
+
+
+      name_climate:
+        card:
+          type: custom:button-card
+          show_entity_picture: true
+          entity_picture: /local/pics/ge-logo-small.png
+          show_icon: false
+          styles:
+            card:
+              - background-color: '#3a3a3a'
+              - height: 60px
+              - width: 215px
+              - padding: 0
+              - border: none
+            entity_picture:
+              - max-height: 60px 
+              - width: auto
+          
+
+
+
+      cool:
+        card:
+          type: custom:button-card
+          icon: mdi:snowflake
+          styles:
+            card:
+              - height: 50px
+              - width: 80px
+              - background-color: rgba(0,0,0,0.0
+              - border-width: 0px
+              - border-radius: 0px
+            icon:
+              - width: 40%
+              - color: >
+                  [[[
+                    if (states['climate.codice_1322'].state === 'cool') { 
+                      return 'cornflowerblue';
+                    }else{
+                      return 'rgba(120, 120, 120, 1)';
+                    }  
+                  ]]]  
+          tap_action:
+            action: call-service
+            service: climate.set_hvac_mode
+            service_data:
+              entity_id: '[[[ return variables.climate ]]]'
+              hvac_mode: cool
+      fan_speed:
+        card:
+          type: custom:button-card
+          icon: mdi:fan
+          styles:
+            card:
+              - height: 50px
+              - width: 80px
+              - background-color: rgba(0,0,0,0.0
+              - border-width: 0px
+              - border-radius: 0px
+            icon:
+              - width: 40%
+              - color: rgba(120, 120, 120, 1)
+          tap_action:
+            action: call-service
+            service: climate.set_fan_mode
+            service_data:
+              entity_id: '[[[ return variables.climate ]]]'
+              fan_mode: |
+                [[[
+                  if (states[variables.climate].attributes.fan_mode == 'low') return 'mid';
+                  if (states[variables.climate].attributes.fan_mode == 'mid') return 'high';
+                  if (states[variables.climate].attributes.fan_mode == 'high') return 'auto';
+                  else return 'low';
+                ]]]
+      fan:
+        card:
+          type: custom:button-card
+          icon: mdi:air-filter
+          styles:
+            card:
+              - height: 50px
+              - width: 80px
+              - background-color: rgba(0,0,0,0.0
+              - border-width: 0px
+              - border-radius: 0px
+            icon:
+              - width: 40%
+              - color: >
+                  [[[
+                    if (states['climate.codice_1322'].state === 'fan_only') { 
+                      return 'white';
+                    }else{
+                      return 'rgba(120, 120, 120, 1)';
+                    }  
+                  ]]]  
+          tap_action:
+            action: call-service
+            service: climate.set_hvac_mode
+            service_data:
+              entity_id: '[[[ return variables.climate ]]]'
+              hvac_mode: fan_only          
+      power:
+        card:
+          type: custom:button-card
+          icon: mdi:power
+          styles:
+            card:
+              - height: 60px
+              - width: 80px
+              - background-color: rgba(0,0,0,0.0
+              - border-width: 0px
+              - border-radius: 0px
+            icon:
+              - width: 100%
+              - color: |
+                  [[[
+                    if (states[variables.climate].state == 'off') return 'rgba(28, 28, 28, 1)';
+                    else return 'rgba(255, 0, 0, 1)';
+                  ]]] 
+          tap_action:
+            action: call-service
+            service: |
+              [[[
+                if (states[variables.climate].state == 'off') return 'climate.turn_on';
+                else return 'climate.turn_off';
+              ]]]
+            service_data:
+              entity_id: '[[[ return variables.climate ]]]'
+      plus:
+        card:
+          type: custom:button-card
+          icon: mdi:plus-thick
+          styles:
+            card:
+              - height: 50px
+              - width: 80px
+              - background-color: rgba(0,0,0,0.0
+              - border-width: 0px
+              - border-radius: 0px
+            icon:
+              - width: 40%
+              - color: rgba(120, 120, 120, 1)
+          tap_action:
+            action: call-service
+            service: climate.set_temperature
+            service_data:
+              entity_id: '[[[ return variables.climate ]]]'
+              temperature: '[[[ return states[variables.climate].attributes.temperature + 1; ]]]'
+      less:
+        card:
+          type: custom:button-card
+          icon: mdi:minus-thick
+          styles:
+            card:
+              - height: 50px
+              - width: 80px
+              - background-color: rgba(0,0,0,0.0
+              - border-width: 0px
+              - border-radius: 0px
+            icon:
+              - width: 40%
+              - color: rgba(120, 120, 120, 1)
+          tap_action:
+            action: call-service
+            service: climate.set_temperature
+            service_data:
+              entity_id: '[[[ return variables.climate ]]]'
+              temperature: '[[[ return states[variables.climate].attributes.temperature - 1; ]]]'
+      display:
+        card:
+          type: custom:button-card
+          styles:
+            card:
+              - background-color: rgba(0,0,0,0.0)
+              - border-width: 0px
+              - height: 249px
+              - width: 214px
+              - padding: 0px
+              - border-radius: 0px
+            custom_fields:
+              set_temp:
+                - position: absolute
+                - left: 54px
+                - top: 36px
+              cur_temp:
+                - position: absolute
+                - left: 5px
+                - top: 198px
+              mode:
+                - position: absolute
+                - top: 142px
+                - left: 2px
+              fan:
+                - position: absolute
+                - top: 150px
+                - left: 140px
+              fan_vel:
+                - position: absolute
+                - top: 128px
+                - left: 140px  
+              states:
+                - position: absolute
+                - top: -1px
+                - left: 0px
+          custom_fields:
+            states:
+              card:
+                type: custom:button-card
+                tap_action:
+                  action: none
+                show_icon: true
+                show_label: true
+                styles:
+                  card:
+                    - height: 50px
+                    - background-color: rgba(0,0,0,0.0)
+                    - width: 214px
+                    - border-width: 0px
+                    - border-radius: 0px
+                  name:
+                    - justify-self: center
+                    - font-size: 100%
+                    - color: rgba(49, 46, 42, 1)
+                  label:
+                    - color: rgba(49, 46, 42, 1)
+                    - justify-self: left
+                    - font-size: 90%
+                  icon:
+                    - width: 70%
+                    - color: rgba(49, 46, 42, 1)
+                name: >
+                  [[[
+                    if(states['input_boolean.clima_last_operation'].state === 'on'){
+                      if (states[variables.climate].attributes.last_on_operation == 'dry'){ 
+                        return 'Ultima Mod.: DEUMIDIFICATORE'  
+                      }  
+                      if (states[variables.climate].attributes.last_on_operation == 'fan_only'){ 
+                        return 'Ultima Mod.: VENTILATORE'  
+                      }  
+                      if (states[variables.climate].attributes.last_on_operation == 'cool'){ 
+                        return 'Ultima Mod.: FREDDO'  
+                      }  
+                      if (states[variables.climate].attributes.last_on_operation == 'heat'){ 
+                        return 'Ultima Mod.: CALDO'  
+                      }  
+                    }else{  
+                      if(states[variables.climate].state === 'fan_only'){ 
+                        return 'VENTILATORE'
+                      }else if (states[variables.climate].state === 'dry'){
+                        return 'DEUMIDIFICATORE'
+                      }else if (states[variables.climate].state === 'cool'){
+                        return 'FREDDO'  
+                      }else if (states[variables.climate].state === 'heat'){
+                        return 'CALDO'  
+                      }else{    
+                        return states[variables.climate].state.toUpperCase()
+                      }
+                    }  
+                  ]]]
+                        
+            fan:
+              card:
+                type: custom:button-card
+                tap_action:
+                  action: none
+                show_icon: true
+                show_label: true
+                styles:
+                  card:
+                    - height: 50px
+                    - background-color: rgba(0,0,0,0.0)
+                    - width: 130px
+                    - border-width: 0px
+                    - border-radius: 0px
+                  name:
+                    - color: rgba(49, 46, 42, 1)
+                    - font-size: 120%
+                    - justify-self: left
+                    - font-weight: bold
+                  label:
+                    - color: rgba(49, 46, 42, 1)
+                    - justify-self: left
+                    - font-size: 90%
+                  icon:
+                    - width: 70%
+                    - color: rgba(49, 46, 42, 1)
+                name: >-
+                  [[[ return
+                  states[variables.climate].attributes.fan_mode.toUpperCase()]]]
+            fan_vel:
+              card:
+                type: custom:button-card
+                tap_action:
+                  action: none
+                show_icon: false
+                show_label: true
+                show_name: false
+                styles:
+                  card:
+                    - height: 50px
+                    - background-color: rgba(0,0,0,0.0)
+                    - width: 130px
+                    - border-width: 0px
+                    - border-radius: 0px
+                  label:
+                    - color: rgba(49, 46, 42, 1)
+                    - justify-self: left
+                    - font-size: 80%
+                    - font-style: italic
+                label: 'SPEED:'            
+            mode:
+              card:
+                type: custom:button-card
+                styles:
+                  card:
+                    - background-color: rgba(0,0,0,0.0)
+                    - border-width: 0px
+                    - border-radius: 0px
+                    - height: 50px
+                    - width: 181.5px
+                  custom_fields:
+                    mode_label:
+                      - position: absolute
+                      - left: 5px
+                    heat:
+                      - position: absolute
+                      - left: 50px
+                    cool:
+                      - position: absolute
+                      - left: 50px
+                    dry:
+                      - position: absolute
+                      - left: 50px
+                    fan_only:
+                      - position: absolute
+                      - left: 50px
+                    fan_label:
+                      - position: absolute
+                      - left: 100px  
+                custom_fields:
+                  mode_label:
+                    card:
+                      type: custom:button-card
+                      tap_action:
+                        action: call-service
+                        service: input_boolean.toggle
+                        service_data:
+                          entity_id: input_boolean.clima_last_operation
+                      show_icon: false
+                      show_label: true
+                      show_name: false
+                      styles:
+                        card:
+                          - height: 50px
+                          - background-color: rgba(0,0,0,0.0)
+                          - width: 100px
+                          - border-width: 0px
+                          - border-radius: 0px
+                        label:
+                          - color: rgba(49, 46, 42, 1)
+                          - justify-self: left
+                          - font-size: 80%
+                          - font-style: italic
+                      label: 'MODE:'     
+                  fan_label:
+                    card:
+                      type: custom:button-card
+                      icon: mdi:fan 
+                      tap_action:
+                        action: none
+                      show_icon: true
+                      show_label: false
+                      show_name: false
+                      styles:
+                        card:
+                          - background-color: rgba(0,0,0,0.0)
+                          - border-width: 0px
+                          - border-radius: 0px
+                          - width: 40px
+                        icon:
+                          - width: 60%
+                          - color: rgba(49, 46, 42, 1)
+                        
+                      
+                  fan_only:
+                    card:
+                      type: custom:button-card
+                      tap_action:
+                        action: none
+                      styles:
+                        card:
+                          - background-color: rgba(0,0,0,0.0)
+                          - border-width: 0px
+                          - border-radius: 0px
+                          - width: 40px
+                        icon:
+                          - width: 80%
+                          - color: rgba(49, 46, 42, 1)
+                      icon: |
+                        [[[
+                          if (states[variables.climate].state == 'fan_only')
+                            return "mdi:air-filter";
+                        ]]]
+                  dry:
+                    card:
+                      type: custom:button-card
+                      tap_action:
+                        action: none
+                      styles:
+                        card:
+                          - background-color: rgba(0,0,0,0.0)
+                          - border-width: 0px
+                          - border-radius: 0px
+                          - width: 40px
+                        icon:
+                          - width: 80%
+                          - color: rgba(49, 46, 42, 1)
+                      icon: |
+                        [[[
+                          if (states[variables.climate].state == 'dry')
+                            return "mdi:water-percent";
+                        ]]]
+                  cool:
+                    card:
+                      type: custom:button-card
+                      tap_action:
+                        action: none
+                      styles:
+                        card:
+                          - background-color: rgba(0,0,0,0.0)
+                          - border-width: 0px
+                          - border-radius: 0px
+                          - width: 40px
+                        icon:
+                          - width: 80%
+                          - color: rgba(49, 46, 42, 1)
+                      icon: |
+                        [[[
+                          if (states[variables.climate].state == 'cool')
+                            return "mdi:snowflake";
+                        ]]]
+                  heat:
+                    card:
+                      type: custom:button-card
+                      tap_action:
+                        action: none
+                      styles:
+                        card:
+                          - background-color: rgba(0,0,0,0.0)
+                          - border-width: 0px
+                          - border-radius: 0px
+                          - width: 40px
+                        icon:
+                          - width: 80%
+                          - color: rgba(49, 46, 42, 1)
+                      icon: |
+                        [[[
+                          if (states[variables.climate].state == 'heat')
+                            return "mdi:fire";
+                        ]]]
+            cur_temp:
+              card:
+                type: custom:button-card
+                name: >-
+                  [[[ return
+                  states[variables.climate].attributes.current_temperature + '°' ]]]
+                label: >-
+                  [[[ return states[variables.climate].attributes.current_humidity +
+                  '%' ]]]
+                icon: mdi:home-export-outline
+                tap_action:
+                  action: none
+                show_icon: true
+                show_label: true
+                styles:
+                  card:
+                    - height: 50px
+                    - background-color: rgba(0,0,0,0.0)
+                    - width: 210px
+                    - border-width: 0px
+                    - border-radius: 0px
+                  name:
+                    - color: rgba(49, 46, 42, 1)
+                    - font-size: 130%
+                    - justify-self: left
+                  label:
+                    - color: rgba(49, 46, 42, 1)
+                    - justify-self: left
+                    - font-size: 130%
+                  icon:
+                    - width: 60%
+                    - color: rgba(49, 46, 42, 1)
+                  grid:
+                    - grid-template-areas: '"i n l " '
+                    - grid-template-columns: 1fr 1fr 1fr
+            set_temp:
+              card:
+                type: custom:button-card
+                name: >-
+                  [[[ return states[variables.climate].attributes.temperature +
+                  '°']]]
+                tap_action:
+                  action: none
+                styles:
+                  card:
+                    - border-width: 0px
+                    - background-color: rgba(0,0,0,0.0)
+                  name:
+                    - color: rgba(49, 46, 42, 1)
+                    - font-size: 520%
+      image: >
+        <svg xml:space="preserve" width="344" height="698" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+        viewBox="0 0 7528.7 15667.7"
+        <defs>
+          <style type="text/css">
+          <![CDATA[
+            .str0 {stroke:#D9D9D9;stroke-width:26.46;stroke-linecap:round;stroke-miterlimit:22.9256}
+            .str2 {stroke:#1A1A1A;stroke-width:79.38;stroke-miterlimit:22.9256}
+            .str3 {stroke:#1A1A1A;stroke-width:98.26;stroke-miterlimit:22.9256}
+            .str1 {stroke:#5D5D5D;stroke-width:17.64;stroke-miterlimit:22.9256}
+            .fil4 {fill:none}
+            .fil2 {fill:none;fill-rule:nonzero}
+            .fil6 {fill:#1A1A1A;fill-rule:nonzero}
+            .fil1 {fill:#3A3A3A;fill-rule:nonzero}
+            .fil5 {fill:#5D5D5D;fill-rule:nonzero}
+            .fil3 {fill:#CCE4E6;fill-rule:nonzero}
+            .fil0 {fill:#D9D9D9;fill-rule:nonzero}
+            .fil7 {fill:url(#id0)}
+          ]]>
+          </style>
+          <radialGradient id="id0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1 -0 -0 1 0 0)" cx="3761.03" cy="11823.53" r="1062" fx="3761.03" fy="11823.53">
+          <stop offset="0" style="stop-opacity:1; stop-color:#7A7979"/>
+          <stop offset="1" style="stop-opacity:1; stop-color:#3A3A3A"/>
+          </radialGradient>
+        </defs>
+        <g id="Livello_x0020_1">
+          <metadata id="CorelCorpID_0Corel-Layer"/>
+          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                127 0" result="hardAlpha"/>
+          <feOffset dy="4"/>
+          <feGaussianBlur stdDeviation="2"/>
+          <feComposite in2="hardAlpha" operator="out"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                0.25 0"/>
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_23_8"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_23_8" result="shape"/>
+          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                127 0" result="hardAlpha"/>
+          <feOffset dy="4"/>
+          <feGaussianBlur stdDeviation="2"/>
+          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0
+                0 0 0 0 0 0 0 0.25 0"/>
+          <feBlend mode="normal" in2="shape" result="effect1_innerShadow_23_8"/>
+          <path class="fil0" d="M7525.38 11862.41c0,2086.71 -1692.6,3778.39 -3780.58,3778.39 -2087.99,0 -3780.6,-1691.68 -3780.6,-3778.39 0,-2086.73 1692.61,-3778.42 3780.6,-3778.42 2087.98,0 3780.58,1691.69 3780.58,3778.42z"/>
+          <path class="fil0" d="M449.48 13680.68c-514.89,-1209.61 -686.52,-2791.4 0,-4038.21l0 -8392.81c1802.15,-1377.09 4307.98,-1916.76 6573.56,0l0 8392.81c703.68,1358.47 635.05,2809.99 0,4038.21l-6573.56 0z"/>
+          <path class="fil1" d="M6463.42 906.83c-1476.04,-1046.36 -3707.27,-1097.82 -5337.79,0l0 9370.9 5337.79 0 0 -9370.9z"/>
+          <path class="fil1" d="M6929.95 11862.41c0,1759.08 -1426.02,3185.16 -3185.15,3185.16 -1759.14,0 -3185.17,-1426.08 -3185.17,-3185.16 0,-1404.51 909.05,-2596.73 2170.9,-3020.3 318.58,-106.94 659.66,-164.89 1014.27,-164.89 388.36,0 760.5,69.51 1104.61,196.75 1214.66,449.14 2080.54,1617.69 2080.54,2988.44z"/>
+          <path class="fil2 str0" d="M1101.74 855.78c1752.05,-1054.35 3530.63,-1077.14 5337.79,2.03"/>
+          <polygon class="fil3" points="1358.16,2290.77 6163.89,2290.77 6163.89,7882.81 1358.16,7882.81 "/>
+          <line class="fil4 str1" x1="1358.16" y1="3339.05" x2="6163.88" y2= "3339.05" />
+          <line class="fil4 str1" x1="1358.16" y1="5455.8" x2="6163.88" y2= "5455.8" />
+          <g>
+          <polygon class="fil5" points="3769.84,5455.8 3769.84,6668.26 3752.2,6668.26 3752.2,5455.8 "/>
+          </g>
+          <line class="fil4 str1" x1="1358.16" y1="6668.26" x2="6163.88" y2= "6668.26" />
+          <line class="fil4 str2" x1="2698.41" y1="8809.99" x2="2697.05" y2= "14882.21" />
+          <g>
+          <polygon class="fil6" points="4784.75,14849.42 4784.75,8809.99 4864.13,8809.99 4864.13,14849.42 "/>
+          </g>
+          <line class="fil4 str2" x1="727.33" y1="12884.98" x2="6762.25" y2= "12884.98" />
+          <line class="fil4 str2" x1="755.01" y1="10761.53" x2="6734.57" y2= "10761.53" />
+          <circle class="fil7" cx="3761.03" cy="11823.53" r="1504.07"/>
+          <path class="fil4 str3" d="M4826.1 10761.53c281.13,281.94 439,663.85 439,1062 0,830.68 -673.39,1504.07 -1504.07,1504.07 -830.68,0 -1504.07,-673.39 -1504.07,-1504.07 0,-398.15 157.87,-780.06 439,-1062"/>
+          <path class="fil4 str2" d="M2709.11 8847.62c-1282.18,447.38 -2141.12,1656.8 -2141.12,3014.79 0,1763.47 1429.57,3193.04 3193.04,3193.04 1763.47,0 3193.04,-1429.57 3193.04,-3193.04 0,-1352.84 -852.54,-2558.85 -2127.89,-3010.14"/>
+          <g>
+          <polygon class="fil6" points="2731.26,10800.57 763.59,10800.57 763.59,10722.49 2731.26,10722.49 "/>
+          </g>
+          <g>
+          <polygon class="fil6" points="6774.72,10800.57 4783.75,10800.57 4783.75,10722.49 6774.72,10722.49 "/>
+          </g>
+        </g>
+        </svg>
