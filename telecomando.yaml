@@ -1,4 +1,4 @@
-# CLIMATIZZATORE MODELLO FRANCESCO CALAMITA MODIFICATO DA NICOLA TESTA
+# CLIMATIZZATORE MODELLO Home Assistant PRO team MODIFICATO DA NICOLA TESTA
 # https://github.com/Home-Assistant-Pro-Team/Climate
 
   - type: custom:button-card
@@ -76,7 +76,7 @@
               - width: 50%
               - color: >
                   [[[
-                    if (states['climate.codice_1322'].state === 'dry') { 
+                    if (states[variables.climate].state === 'dry') { 
                       return 'orange';
                     }else{
                       return 'rgba(120, 120, 120, 1)';
@@ -106,7 +106,7 @@
               - width: 40%
               - color: >
                   [[[
-                    if (states['climate.codice_1322'].state === 'heat') { 
+                    if (states[variables.climate].state === 'heat') { 
                       return 'red';
                     }else{
                       return 'rgba(120, 120, 120, 1)';
@@ -157,7 +157,7 @@
               - width: 40%
               - color: >
                   [[[
-                    if (states['climate.codice_1322'].state === 'cool') { 
+                    if (states[variables.climate].state === 'cool') { 
                       return 'cornflowerblue';
                     }else{
                       return 'rgba(120, 120, 120, 1)';
@@ -210,7 +210,7 @@
               - width: 40%
               - color: >
                   [[[
-                    if (states['climate.codice_1322'].state === 'fan_only') { 
+                    if (states[variables.climate].state === 'fan_only') { 
                       return 'white';
                     }else{
                       return 'rgba(120, 120, 120, 1)';
