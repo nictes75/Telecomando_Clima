@@ -22,4 +22,6 @@ Il progetto prevede che il climatizzatore possa fare le sequenti funzioni:
 - heat
 - fan_only
 
-Premendo nel display sopra la parole MODE visualizza l'ultima modalità eseguita dal climatizzatore.
+In modalità OFF, premendo nel display sopra la parole MODE visualizza l'ultima modalità eseguita dal climatizzatore.
+
+Nei file è disponibile anche il logo (ge-logo-small.png)
