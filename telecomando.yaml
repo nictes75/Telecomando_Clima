@@ -3,7 +3,7 @@
 
   - type: custom:button-card
     variables:
-      climate: climate.XXXXX      <----  INSERIRE QUI LA VOSTRA ENTITA' CLIMATE
+      climate: climate.XXXXX      <----  INSERIRE QUI LA VOSTRA ENTITA' CLIMATE OTTENUTA DALL'INTEGRAZIONE SmartIR
     triggers_update: all
     styles:
       card:
