@@ -2,7 +2,8 @@
 Telecomando climatizzatore in yaml per home assistant
 
 
-![telecomando](https://github.com/nictes75/Telecomando_Clima/assets/82874404/e3753554-7380-4d10-864a-a0087b020f53)
+![telecomando](https://github.com/user-attachments/assets/33560f0b-fe44-4dd1-a32b-684f157239a5)
+
 
 
 
