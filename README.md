@@ -11,13 +11,14 @@ ACCESO
 
 Per utilizzare il codice dovete sostituire l'entita CLIMATE con la vostra e se volete il logo del vostro climatizzatore.
 
-In configuration.yaml dovete aggiungere un entità input_bolean:
+In configuration.yaml dovete aggiungere un entità input_bolean o un aiutante così configurato:
 
-clima_last_operation:
-  name: clima_last_operation
-  initial: off  
-
-
+<strong>
+clima_last_operation:<br/>
+&nbsp; &nbsp; name: clima_last_operation<br/>
+&nbsp; &nbsp; initial: off<br/>  
+</strong>
+<br/> <br/> 
 
 Il progetto prevede che il climatizzatore possa fare le sequenti funzioni:
 - dry
