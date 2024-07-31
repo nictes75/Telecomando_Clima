@@ -3,7 +3,7 @@
 
   - type: custom:button-card
     variables:
-      climate: climate.XXXXX      <----  INSERIRE QUI LA VOSTRA ENTITA' CLIMATE OTTENUTA DALL'INTEGRAZIONE SmartIR
+      climate: climate.XXXXX      // <----  INSERIRE QUI LA VOSTRA ENTITA' CLIMATE OTTENUTA DALL'INTEGRAZIONE SmartIR
     triggers_update: all
     styles:
       card:
@@ -127,7 +127,7 @@
         card:
           type: custom:button-card
           show_entity_picture: true
-          entity_picture: /local/pics/ge-logo-small.png
+          entity_picture: /local/pics/ge-logo-small.png     //<---- SOTITUIRE CON IL LOGO DEL PROPRIO CLIMATIZZATORE
           show_icon: false
           styles:
             card:
